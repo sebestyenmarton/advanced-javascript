@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+* {
+    outline: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    padding-top: 32px;
+    background: linear-gradient(45deg, rgba(150,150,255,0.5), transparent);        
+}
+
+.generic-table {
+    display: grid;
+    grid-template-areas:
+        "search add"
+        "table table";
+    max-width: 1280px;
+    margin: auto;
+    font-size: 14px;
+    background: white;
+    border: 1px solid rgba(0,0,0,.45);
+    border-radius: 3px;
+    padding: 16px 0;
+    box-shadow: 4px 4px 5px 5px rgb(0 0 0 / 20%);
+}
+
+.generic-table input {
+    padding: 4px 8px;
+}
+
+.generic-table > div {
+    padding: 0 16px;
+}
+
+.generic-table .search-container {
+    grid-area: search;
+    text-align: left;
+    padding-top: 8px;
+}
+
+.generic-table .add-container {
+    grid-area: add;
+    text-align: right;
+}
+
+.generic-table .add-container button {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: radial-gradient(#ff0000, #ffdddd);
+    border: 1px solid rgba(0,0,0,.35);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, .20);
+    transition: 0.3s ease;
+    font-size: 0;
+}
+
+.generic-table .add-container button:hover {
+    background: radial-gradient(#ff3333, #ffdddd);
+    border: 1px solid rgba(0,0,0,.25);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, .15);
+}
+
+.generic-table .add-container button:active {
+    top: 1px;
+    left: 1px;
+    background: radial-gradient(#ff0000, #ffbbbb);
+    border: 1px solid rgba(0,0,0,.4);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, .25);
+}
+
+.generic-table .add-container button::after {
+    content: '+';
+    color: white;
+    position: absolute;
+    font-size: 32px;
+    font-family: sans-serif;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 2px #000;
+}
+
+.generic-table .table-container {
+    grid-area: table;
+    overflow: auto;
+    max-height: calc(100vh - 125px);
+    padding: 0;
+}
+
+.generic-table table {
+    border: 1px solid rgba(0,0,0,.25);
+    border-collapse: collapse;
+    margin: 0 16px;
+    width: calc(100% - 32px);
+}
+
+.generic-table table tr {
+    border: 1px solid rgba(0,0,0,.25);
+    background: linear-gradient(to top, #eee, #fff);
+}
+
+.generic-table table tr:first-child {
+    background: linear-gradient(to top, #ccc, #fff);
+}
+
+.generic-table table tr:not(:first-child):hover {
+    background: linear-gradient(to top, #ddd, #eee);
+}
+
+.generic-table table td, 
+.generic-table table th {
+    padding: 8px 16px;
+    text-align: left;
+}
+
+.generic-table table th.sortable {
+    position: relative;
+    cursor: pointer;
+}
+
+.generic-table table td button {
+    border: 1px solid #777;
+    border-radius: 4px;
+    margin-right: 6px;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.generic-table table td button.edit-btn {
+    background: linear-gradient(to top, #aaf, #fff);
+}
+
+.generic-table table td button.delete-btn {
+    background: linear-gradient(to top, #f77, #fff);
+}
+
+.generic-table table th .sort-arrow {
+    position: absolute;
+    transform: translate(3px, -10px);
+    color: blue;
+    font-size: 24px;
+}
+
+.generic-table .add-edit-form {
+    position: fixed;
+    top: 0;
+    background: rgba(0,0,0,0.75);
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.generic-table .add-edit-form form {
+    padding: 24px;
+    background: white;
+    border-radius: 24px 0 24px 0;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.25), 0 0 20px 10px rgba(0, 0, 0, 0.35) inset;
+    border: 2px solid #000;
+}
+
+.generic-table .add-edit-form form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    background: -webkit-linear-gradient(#eee, #333);
+    font-size: 32px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.generic-table .add-edit-form form input:not([type="submit"]) {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.generic-table input:not([type="submit"]) {
+    transition: 0,3 ease;
+}
+
+.generic-table input:not([type="submit"]):focus {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .20);
+    background: rgba(255,255,200,0.8);
+}
+
+.generic-table .add-edit-form form input[type="submit"],
+.generic-table .add-edit-form form button[type="button"] {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: white;
+    min-width: 64px;
+    margin-top: 8px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.generic-table .add-edit-form form input[type="submit"] {
+    float: left;
+    background: linear-gradient(to bottom, #fff, #aaf);
+}
+
+.generic-table .add-edit-form form button[type="button"] {
+    float: right;
+    background: linear-gradient(to bottom, #fff, #aaa);
+}
+
+.generic-table .add-edit-form form input[type="submit"]:hover {
+    background: linear-gradient(to bottom, #fff, #bbf);
+}
+
+.generic-table .add-edit-form form button[type="button"]:hover {
+    background: linear-gradient(to bottom, #fff, #bbb);
+}
+
+.generic-table .add-edit-form form input[type="submit"]:active {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    background: linear-gradient(to bottom, #fff, #99f);
+}
+
+.generic-table .add-edit-form form button[type="button"]:active {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    background: linear-gradient(to bottom, #fff, #999);
+}
+

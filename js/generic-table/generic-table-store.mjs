@@ -12,7 +12,6 @@ export class GenericTableStore {
     refreshCb = null;           // function
     tableConfig = null;         // table config
     currentItem = null;         // current item for add and edit
-    sortableColumns = [];       // which columns should be sorted
     currentSort = [];           // [id, direction]
     searchTerm = '';            // search term
     items = [];                 // unfiltred items
@@ -63,10 +62,10 @@ export class GenericTableStore {
         });
         const savedItem = await request.json();
         const mappedItem = new Model(savedItem);
-        this.setItems([mappedItem, ...this.items, item]);
+        this.setItems([mappedItem, ...this.items]);
         return mappedItem;
     }
-
+   // https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/employees/234234234
     update = async  (data) => {
         const request = await fetch(this.tableConfig.endpoint + data.id, { 
             method: 'PUT',

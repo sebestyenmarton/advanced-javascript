@@ -2,7 +2,9 @@
 First lessons about the frontend
 
 ## Lessons:
-- Advanced Javascript - [click here](https://1drv.ms/p/s!ApfAMuMbRnyEohoPrsqUj8D2Gf_t?e=vWfPxN)
+- Advanced Javascript 
+     - [click here for powerpoint](https://1drv.ms/p/s!ApfAMuMbRnyEohoPrsqUj8D2Gf_t?e=vWfPxN)
+     - youtube video: https://youtu.be/oX3jexXZy5k
 
 #### Repo:
 - ssh: [git@github.com:dirico-oradea/advanced-javascript.git](git@github.com:dirico-oradea/advanced-javascript.git)

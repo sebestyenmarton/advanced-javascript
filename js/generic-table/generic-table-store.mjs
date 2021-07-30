@@ -67,6 +67,7 @@ export class GenericTableStore {
     }
    // https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/employees/234234234
     update = async  (data) => {
+	    const Model = this.tableConfig.model;
         const request = await fetch(this.tableConfig.endpoint + data.id, { 
             method: 'PUT',
             body: JSON.stringify(data),

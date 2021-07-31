@@ -1,4 +1,4 @@
-import { SORT_DIRECTION } from './generic-table-store.mjs';
+import { SORT_DIRECTION } from './generic-todo-store.mjs';
 import { BaseComponent } from '../core/base-component.mjs';
 
 export class GenericTableComponent extends BaseComponent {
@@ -26,7 +26,7 @@ export class GenericTableComponent extends BaseComponent {
         });
         const actionLiBox = { tagName: 'div', children: ['Actions'] };
         return { tagName: 'li', children: [...libox, actionLiBox] };
-    }
+    }   
 
     renderBodyRow = (item) => {
         const libox = this.listConfig.columns.map(column => {
@@ -34,12 +34,12 @@ export class GenericTableComponent extends BaseComponent {
             return ul;
         });
         
-        const editAction = { tagName: 'button', attributes: { className: 'edit-btn', onclick: () => this.store.setCurrentItem(item) }, children: ['edit'] };
+        //const editAction = { tagName: 'button', attributes: { className: 'edit-btn', onclick: () => this.store.setCurrentItem(item) }, children: ['edit'] };
         const deleteAction = { tagName: 'button', attributes: { className: 'delete-btn', onclick: () => this.store.delete(item) }, children: ['delete'] };
 
-        const actions = [editAction, deleteAction];
+        const actions = [/* editAction, */ deleteAction];
         const actionLiBox = this.renderUlLi({}, actions);
-        return { tagName: 'li', children: [...libox, actionLiBox] };
+        return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [...libox, actionLiBox] };
     }
 
     renderUlLi = (attributes, children) => {
@@ -67,6 +67,7 @@ export class GenericTableComponent extends BaseComponent {
 
     renderForm = () => {
         const item = this.store.currentItem;
+
         const { formFields } = this.listConfig;
 
         const children = [
@@ -74,7 +75,7 @@ export class GenericTableComponent extends BaseComponent {
         ];
 
         formFields.forEach(fieldAttributes => {
-            let value ='';  // = item[fieldAttributes.name] || '';
+            let value = item[fieldAttributes.name] || '';
             if (fieldAttributes.type === 'checkbox') {
                 fieldAttributes.checked = item[fieldAttributes.name]
             } else if (fieldAttributes.type === 'datetime-local' && typeof value === 'string') {
@@ -116,7 +117,6 @@ export class GenericTableComponent extends BaseComponent {
             ]
         };
     }
-
     renderAddButton = () => {
         return { 
             tagName: 'div', 
@@ -130,17 +130,15 @@ export class GenericTableComponent extends BaseComponent {
             ] 
         };
     }
-
     render() {
         const children = [
-            this.renderForm(),
             this.renderSearchBar(),
             this.renderAddButton(),
             this.renderUl()
         ];
-/*         if (this.store.currentItem) {
-            children.push(this.renderForm());
-        } */
+         if (this.store.currentItem) {
+            children.unshift(this.renderForm());
+        } 
         return this.renderElement({ tagName: 'div', attributes: { className: 'generic-table' }, children });
     }
 }

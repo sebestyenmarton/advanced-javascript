@@ -1,6 +1,6 @@
-import { GenericTableComponent } from './generic-table/generic-table-component.mjs';
-import { GenericTableStore } from './generic-table/generic-table-store.mjs';
-import { Employee } from './Todoo.mjs';
+import { GenericTableComponent } from './generic-list/generic-todo-component.mjs';
+import { GenericTableStore } from './generic-list/generic-todo-store.mjs';
+import { Employee } from './Todo.mjs';
 
 // condition when page is ready then call init, else create event listener which wait till the page is loaded
 if (document.readyState === 'complete') {

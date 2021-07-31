@@ -14,7 +14,9 @@ export class BaseComponent {
                 return document.createTextNode(String(data));
             }
         }
-        const { tagName, attributes, children } = data;
+        const { tagName, attributes, children } = data; 
+            //= const { div, className: 'generic-table', 
+            // [ renderSearchBar(),renderAddButton(),renderUl() ]}; from generic-table-component
         const element = document.createElement(tagName.toUpperCase());
         if (typeof attributes === 'object') {
             for (let attributeName in attributes) {

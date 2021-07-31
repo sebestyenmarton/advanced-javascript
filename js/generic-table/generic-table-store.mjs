@@ -10,19 +10,20 @@ export const SORT_DIRECTION = ['ASC', 'DESC'];
 
 export class GenericTableStore {
     refreshCb = null;           // function
-    tableConfig = null;         // table config
+    listConfig = null;         // table config
     currentItem = null;         // current item for add and edit
+    sortableColumns = [];       // which columns should be sorted
     currentSort = [];           // [id, direction]
     searchTerm = '';            // search term
     items = [];                 // unfiltred items
     
-    constructor(tableConfig) {
-        this.tableConfig = tableConfig;
+    constructor(listConfig) {
+        this.listConfig = listConfig;
         this.init();
     }
 
     init() {
-        const firstSortableColumn = this.tableConfig.columns.find(x => x.sorter);
+        const firstSortableColumn = this.listConfig.columns.find(x => x.sorter);
         if (firstSortableColumn) {
             this.setSort(firstSortableColumn.id);
         }
@@ -32,16 +33,16 @@ export class GenericTableStore {
 
     // --- CRUD method: get/created/update/delete ---
     get = async (id) => {
-        const Model = this.tableConfig.model;
-        const request = await fetch(this.tableConfig.endpoint + id);
+        const Model = this.listConfig.model;
+        const request = await fetch(this.listConfig.endpoint + id);
         const item = await request.json();
         const mappedItem = new Model(item);
         return mappedItem;
     }   
 
     getList = async () => {
-        const Model = this.tableConfig.model;
-        const request = await fetch(this.tableConfig.endpoint);
+        const Model = this.listConfig.model;
+        const request = await fetch(this.listConfig.endpoint);
         const items = await request.json();
         const mappedItems = items.map(x => new Model(x));
         this.setItems(mappedItems);
@@ -50,9 +51,9 @@ export class GenericTableStore {
 
     create = async (data) => {
         data.id = guid();
-        const Model = this.tableConfig.model;
+        const Model = this.listConfig.model;
         const item = new Model(data);
-        const request = await fetch(this.tableConfig.endpoint, { 
+        const request = await fetch(this.listConfig.endpoint, { 
             method: 'POST', 
             body: JSON.stringify(item),
             headers: {
@@ -62,13 +63,12 @@ export class GenericTableStore {
         });
         const savedItem = await request.json();
         const mappedItem = new Model(savedItem);
-        this.setItems([mappedItem, ...this.items]);
+        this.setItems([mappedItem, ...this.items, item]);
         return mappedItem;
     }
-   // https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/employees/234234234
+
     update = async  (data) => {
-	    const Model = this.tableConfig.model;
-        const request = await fetch(this.tableConfig.endpoint + data.id, { 
+        const request = await fetch(this.listConfig.endpoint + data.id, { 
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {
@@ -83,7 +83,7 @@ export class GenericTableStore {
     }
 
     delete = async (deletedItem) => {
-        await fetch(this.tableConfig.endpoint + deletedItem.id, { method: 'DELETE' });
+        await fetch(this.listConfig.endpoint + deletedItem.id, { method: 'DELETE' });
         this.setItems(this.items.filter(item => item.id !== deletedItem.id));
     }
 
@@ -91,7 +91,7 @@ export class GenericTableStore {
 
     getItems() {
         if (!this.searchTerm) { return this.items; }
-        return this.items.filter(item => this.tableConfig.searchFilter(this.searchTerm, item));
+        return this.items.filter(item => this.listConfig.searchFilter(this.searchTerm, item));
     }
 
     // set item + refresh the component
@@ -104,7 +104,7 @@ export class GenericTableStore {
 
     setCurrentItem(currentItem) {
         if (typeof currentItem === 'undefined') {
-            const Model = this.tableConfig.model;
+            const Model = this.listConfig.model;
             currentItem = new Model();
         }
         this.currentItem = currentItem;
@@ -117,7 +117,7 @@ export class GenericTableStore {
         const [ASC, DESC] = SORT_DIRECTION;
         const [currentId, direction] = this.currentSort;
         this.currentSort = [id, id === currentId && direction === ASC ? DESC : ASC];
-        const column = this.tableConfig.columns.find(c => c.id === id);
+        const column = this.listConfig.columns.find(c => c.id === id);
         const sortedItems = this.items.sort((user1, user2) => column.sorter(user1, user2) * (this.currentSort[1] === DESC ? -1 : 1))
         this.setItems(sortedItems);
     }
@@ -130,7 +130,7 @@ export class GenericTableStore {
         }
     }
 
-    onSubmit = (event) => {
+    onSubmit = (event) => {  //add item-hez
         event.preventDefault();
         event.stopPropagation();
         const inputList = Array.from(event.target.querySelectorAll(`input[name]`));
@@ -144,7 +144,7 @@ export class GenericTableStore {
             data[inputElem.name] = value;
             return data;
         }, {});
-        const data = Object.assign(this.currentItem, this.tableConfig.beforeFormSubmit(formData));
+        const data = Object.assign(this.currentItem, this.listConfig.beforeFormSubmit(formData));
         event.target.reset();
         if (data.id) {
             this.update(data);

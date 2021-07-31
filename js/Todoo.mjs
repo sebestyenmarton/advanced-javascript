@@ -1,17 +1,10 @@
 export class Employee {
     // we list property names for our self, so we know what property should have this object
+    title = undefined;
     id = undefined;
-    userName = undefined;
-    salary = undefined;
-    email = undefined;
-    firstName = undefined;
-    lastName = undefined;
-    function = undefined;
     createdAt = undefined;
-
-    getFullName() {
-        return `${this.firstName} ${this.lastName}`;
-    }
+    inDone = undefined;
+    dueDate = undefined;
 
     constructor(initData) {
         // check if we have initial data

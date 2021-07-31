@@ -2,51 +2,51 @@ import { SORT_DIRECTION } from './generic-table-store.mjs';
 import { BaseComponent } from '../core/base-component.mjs';
 
 export class GenericTableComponent extends BaseComponent {
-    tableConfig = null;
+    listConfig = null;
     store = null;
 
     constructor(store) {
         super();
         this.store = store;
         this.store.refreshCb = this.refresh;
-        this.tableConfig = store.tableConfig;
+        this.listConfig = store.listConfig;
     }
 
-    renderTable = () => {
+    renderUl = () => {
         const headRow = this.renderHeadRow();
         const bodyRows = this.store.getItems().map(item => this.renderBodyRow(item));
-        const table = { tagName: 'table', attributes: this.tableConfig.attributes, children: [headRow, ...bodyRows] };
-        return { tagName: 'div', attributes: { className: 'table-container' }, children: [table] };
+        const ulist = { tagName: 'ul', attributes: this.listConfig.attributes, children: [headRow, ...bodyRows] };
+        return { tagName: 'div', attributes: { className: 'table-container' }, children: [ulist] };
     }
 
     renderHeadRow = () => {
-        const cells = this.tableConfig.columns.map(column => {
-            const td = this.renderTableHeadCell(column);
-            return td;
+        const libox = this.listConfig.columns.map(column => {
+            const ul = this.renderListHeadRow(column);
+            return ul;
         });
-        const actionCell = { tagName: 'th', children: ['Actions'] };
-        return { tagName: 'tr', children: [...cells, actionCell] };
+        const actionLiBox = { tagName: 'div', children: ['Actions'] };
+        return { tagName: 'li', children: [...libox, actionLiBox] };
     }
 
     renderBodyRow = (item) => {
-        const cells = this.tableConfig.columns.map(column => {
-            const td = this.renderTableCell(column.attributes, [column.getCellValue(item)]);
-            return td;
+        const libox = this.listConfig.columns.map(column => {
+            const ul = this.renderUlLi(column.attributes, [column.getCellValue(item)]);
+            return ul;
         });
-
+        
         const editAction = { tagName: 'button', attributes: { className: 'edit-btn', onclick: () => this.store.setCurrentItem(item) }, children: ['edit'] };
         const deleteAction = { tagName: 'button', attributes: { className: 'delete-btn', onclick: () => this.store.delete(item) }, children: ['delete'] };
 
         const actions = [editAction, deleteAction];
-        const actionCell = this.renderTableCell({}, actions);
-        return { tagName: 'tr', children: [...cells, actionCell] };
+        const actionLiBox = this.renderUlLi({}, actions);
+        return { tagName: 'li', children: [...libox, actionLiBox] };
     }
 
-    renderTableCell = (attributes, children) => {
-        return { tagName: 'td', attributes, children };
+    renderUlLi = (attributes, children) => {
+        return { tagName: 'div', attributes, children };
     }
 
-    renderTableHeadCell = (column) => {
+    renderListHeadRow = (column) => {
         const [ASC] = SORT_DIRECTION;
         const attributes = Object.assign({ className: 'sortable' }, column.attributes);
         const children = [
@@ -62,19 +62,19 @@ export class GenericTableComponent extends BaseComponent {
             }
         }
 
-        return { tagName: 'th', attributes, children };
+        return { tagName: 'div', attributes, children };
     }
 
     renderForm = () => {
         const item = this.store.currentItem;
-        const { formFields } = this.tableConfig;
+        const { formFields } = this.listConfig;
 
         const children = [
-            { tagName: 'h2', children: [item.id ? 'Edit Form' : 'Add Form'] }
+            { tagName: 'h2', children: 'Edit Form'}
         ];
 
         formFields.forEach(fieldAttributes => {
-            let value = item[fieldAttributes.name] || '';
+            let value ='';  // = item[fieldAttributes.name] || '';
             if (fieldAttributes.type === 'checkbox') {
                 fieldAttributes.checked = item[fieldAttributes.name]
             } else if (fieldAttributes.type === 'datetime-local' && typeof value === 'string') {
@@ -86,7 +86,7 @@ export class GenericTableComponent extends BaseComponent {
         children.push(
             { 
                 tagName: 'button', 
-                attributes: { type: 'button', onclick: () => this.store.setCurrentItem(null) }, 
+                attributes: { type: 'button', onclick: () => this.store.setCurrentItem() }, 
                 children: ['Cancel'] 
             },
             { 
@@ -133,14 +133,14 @@ export class GenericTableComponent extends BaseComponent {
 
     render() {
         const children = [
+            this.renderForm(),
             this.renderSearchBar(),
             this.renderAddButton(),
-            this.renderTable()
+            this.renderUl()
         ];
-
-        if (this.store.currentItem) {
+/*         if (this.store.currentItem) {
             children.push(this.renderForm());
-        }
+        } */
         return this.renderElement({ tagName: 'div', attributes: { className: 'generic-table' }, children });
     }
 }

@@ -1,6 +1,6 @@
 import { GenericTableComponent } from './generic-table/generic-table-component.mjs';
 import { GenericTableStore } from './generic-table/generic-table-store.mjs';
-import { Employee } from './Employee.mjs';
+import { Employee } from './Todoo.mjs';
 
 // condition when page is ready then call init, else create event listener which wait till the page is loaded
 if (document.readyState === 'complete') {
@@ -15,20 +15,16 @@ function init() {
     window.removeEventListener('load', init);
 
     // we create a table config
-    const tableConfig = {
+    const listConfig = {
         model: Employee,
-        endpoint: 'https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/employees/',
+        endpoint: 'https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/todos/',
         attributes: {},
         formFields: [
-            { placeholder: 'Username', name: 'userName', type: 'text', required: true }, 
-            { placeholder: 'First name', name: 'firstName', type: 'text', required: true },
-            { placeholder: 'Last name', name: 'lastName', type: 'text', required: true }, 
-            { placeholder: 'Email', name: 'email', type: 'text', required: true }, 
-            { placeholder: 'Function', name: 'function', type: 'text', required: true }, 
-            { placeholder: 'Salary', name: 'salary', type: 'number', required: true }
+            { placeholder: 'Title', name: 'title', type: 'text', required: true }, 
+            { placeholder: 'Due Date', name: 'dueDate', type: 'text', required: true },
         ],
         beforeFormSubmit: (data) => {
-            data.salary = parseInt(data.salary);
+            data.salary = parseInt(data.salary);  //átalakítja ,pl ha '1'az adat, akkor 1-re alakítja
             data.createdAt = new Date();
             return data;
         },
@@ -44,41 +40,33 @@ function init() {
             return false;
         },
         columns: [
-            {
-                id: 'fullName',
-                label: 'Full name',
-                getCellValue: (user) => user.getFullName(),
+/*             {
+                id: 'isDone',
+                label: 'Is Done',
+                getCellValue: (user) => user.isDone,
                 attributes: {},
-                sorter: (user1, user2) => user1.getFullName().localeCompare(user2.getFullName())
-
+                sorter: (user1, user2) => user1.isDone.localeCompare(user2.isDone)
+            },   */
+            {
+                id: 'title',
+                label: 'Title',
+                getCellValue: (user) => user.title,
+                attributes: {},
+                sorter: (user1, user2) => user1.title.localeCompare(user2.title)
             },
             {
-                id: 'userName',
-                label: 'User name',
-                getCellValue: (user) => user.userName,
+                id: 'dueDate',
+                label: 'Due Date',
+                getCellValue: (user) => user.dueDate instanceof Date ? user.dueDate.toISOString().substr(0, 19).replace('T', ' ') : (user.dueDate || '-'),
                 attributes: {},
-                sorter: (user1, user2) => user1.userName.localeCompare(user2.userName)
+                sorter: (user1, user2) => new Date (user1.dueDate).getTime() > new Date(user2.dueDate).getTime() ? 1 : -1
             },
-            {
-                id: 'email',
-                label: 'Email',
-                getCellValue: (user) => user.email,
+/*             {
+                id: 'id',
+                label: 'Id',
+                getCellValue: (user) => user.id,
                 attributes: {},
-                sorter: (user1, user2) => user1.email.localeCompare(user2.email)
-            },
-            {
-                id: 'function',
-                label: 'Function',
-                getCellValue: (user) => user.function,
-                attributes: {},
-                sorter: (user1, user2) => user1.function.localeCompare(user2.function)
-            },            
-            {
-                id: 'salary',
-                label: 'Salary',
-                getCellValue: (user) => user.salary,
-                attributes: {},
-                sorter: (user1, user2) => user1.salary > user2.salary ? 1 : -1
+                sorter: (user1, user2) => user1.id.localeCompare(user2.id)
             },
             {
                 id: 'createdAt',
@@ -86,7 +74,7 @@ function init() {
                 getCellValue: (user) => user.createdAt instanceof Date ? user.createdAt.toISOString().substr(0, 19).replace('T', ' ') : (user.createdAt || '-'),
                 attributes: {},
                 sorter: (user1, user2) => new Date (user1.createdAt).getTime() > new Date(user2.createdAt).getTime() ? 1 : -1
-            },
+            }, */  
         ]
     };
 
@@ -94,7 +82,7 @@ function init() {
     const parentElement = document.querySelector('#root');
 
     // table store, handle CRUD and logic
-    const tableStore = new GenericTableStore(tableConfig);
+    const tableStore = new GenericTableStore(listConfig);
 
     // initialize the table component
     const cmp = new GenericTableComponent(tableStore);

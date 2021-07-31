@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
+.myCheck{
+
+}
+
 * {
     outline: none;
     margin: 0;
@@ -15,26 +19,55 @@ html, body {
 
 body {
     padding-top: 32px;
-    background: linear-gradient(45deg, rgba(150,150,255,0.5), transparent);        
-}
+    background: rgb(76,94,168);
+    background: linear-gradient(60deg, rgba(76,94,168,1) 0%, rgba(239,90,154,1) 100%);      }
 
 .generic-table {
-    display: grid;
-    grid-template-areas:
-        "search add"
-        "table table";
+    max-width: 750px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     max-width: 1280px;
     margin: auto;
     font-size: 14px;
-    background: white;
-    border: 1px solid rgba(0,0,0,.45);
-    border-radius: 3px;
-    padding: 16px 0;
-    box-shadow: 4px 4px 5px 5px rgb(0 0 0 / 20%);
+    background: #ffffff60;
+    border-radius: 10px;
+    padding: 0;
+    box-shadow: 4px 4px 12px 12px rgb(0 0 0 / 12%);
+}
+li:first-of-type{
+    display: flex;
+}
+.enabling{
+    display: none;
+}
+.sortable{
+    position: relative;
+    left: -10px;
+    top: 20px;
+    display: flex;
+    padding: 10px 10px;
+}
+
+.search{
+    position: relative;
+    top: 20px;
 }
 
 .generic-table input {
-    padding: 4px 8px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: 0px;
+}
+.generic-table input:nth-of-type(4) {
+    top: -22px;
+    left: 40px;
+    position: relative;
+}
+.generic-table input:nth-of-type(4) {
+    top: -22px;
+    left: 40px;
+    position: relative;
 }
 
 .generic-table > div {
@@ -42,18 +75,18 @@ body {
 }
 
 .generic-table .search-container {
-    grid-area: search;
     text-align: left;
-    padding-top: 8px;
+    padding-top: 18px;
 }
 
 .generic-table .add-container {
-    grid-area: add;
     text-align: right;
 }
 
 .generic-table .add-container button {
     position: relative;
+    top: -67px;
+    left: 90px;
     width: 32px;
     height: 32px;
     margin: 8px;
@@ -107,57 +140,50 @@ body {
 
 .generic-table ul li {
     border: 1px solid rgba(0,0,0,.25);
-    background: linear-gradient(to top, #eee, #fff);
+    background: linear-gradient(to top, #eeeeee90, #ffffff90);
 }
 
-.generic-table ul li:first-child {
-    background: linear-gradient(to top, #ccc, #fff);
-}
 
 .generic-table ul li:not(:first-child):hover {
     background: linear-gradient(to top, #ddd, #eee);
 }
 
 .generic-table ul li{
-    display: grid;
-    grid-template-areas:"title duedate edit";
+    display: flex;
+    justify-content: space-between;
     padding: 8px 16px;
 }
-.generic-table ul li div:nth-of-type(1n+0), 
-.generic-table ul li div:first-of-type{
-    grid-area: title;
+
+/* .generic-table ul li div:nth-of-type(1n+0){
+    grid-area: isdone;
+    display: flex;
+    max-width: 28px;
+    height: 28px;
+} */
+.generic-table ul li div:nth-of-type(2n+0){
+
     display: flex;
     align-items: center;
-    min-width: 180px;
+    min-width: 120px;
 }
-.generic-table ul li div:nth-of-type(2n+0){
+/* .generic-table ul li div:nth-of-type(3n+0){
     grid-area: duedate;
 }
-.generic-table ul li div:nth-of-type(3n+0){
+.generic-table ul li div:nth-of-type(4n+0){
     grid-area: edit;
-
-}
+} */
 
 .generic-table ul li.sortable {
     position: relative;
     cursor: pointer;
 }
 
-.generic-table ul li button {
-    border: 1px solid #777;
-    border-radius: 4px;
+.generic-table ul li i {
     margin-right: 6px;
     cursor: pointer;
     padding: 4px 8px;
 }
 
-.generic-table ul li button.edit-btn {
-    background: linear-gradient(to top, #aaf, #fff);
-}
-
-.generic-table ul li button.delete-btn {
-    background: linear-gradient(to top, #f77, #fff);
-}
 
 .generic-table ul li .sort-arrow {
     position: relative;
@@ -174,10 +200,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #ffffff90;
+    border-radius: 10px;
 }
 
 .generic-table .add-edit-form form {
     padding: 24px;
+    background-color: #00000010;
+    margin: 20px;
 }
 
 .generic-table .add-edit-form form h2 {

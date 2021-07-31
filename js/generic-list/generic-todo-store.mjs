@@ -11,7 +11,7 @@ export const SORT_DIRECTION = ['ASC', 'DESC'];
 export class GenericTableStore {
     refreshCb = null;           // function
     listConfig = null;         // table config
-    currentItem = null;         // current item for add and edit
+    currentItem = 1;         // current item for add and edit
     sortableColumns = [];       // which columns should be sorted
     currentSort = [];           // [id, direction]
     searchTerm = '';            // search term
@@ -151,7 +151,7 @@ export class GenericTableStore {
         } else {
             this.create(data);
         }
-        this.setCurrentItem(null);
+        this.setCurrentItem();
         return false;
     }
 }

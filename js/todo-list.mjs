@@ -30,10 +30,7 @@ function init() {
         },
         searchFilter: (searchTerm, item) => {
             if (
-                searchTerm === '' ||
-                item.userName.includes(searchTerm) ||
-                item.firstName.includes(searchTerm) ||
-                item.lastName.includes(searchTerm)
+                searchTerm === '' || item.title.includes(searchTerm) 
             ) {
                 return true;
             }
@@ -61,6 +58,7 @@ function init() {
                 attributes: {},
                 sorter: (user1, user2) => new Date (user1.dueDate).getTime() > new Date(user2.dueDate).getTime() ? 1 : -1
             },
+
 /*             {
                 id: 'id',
                 label: 'Id',

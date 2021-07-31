@@ -1,6 +1,7 @@
 import { SORT_DIRECTION } from './generic-todo-store.mjs';
 import { BaseComponent } from '../core/base-component.mjs';
 
+
 export class GenericTableComponent extends BaseComponent {
     listConfig = null;
     store = null;
@@ -13,19 +14,20 @@ export class GenericTableComponent extends BaseComponent {
     }
 
     renderUl = () => {
-        const headRow = this.renderHeadRow();
+        //const headRow = this.renderHeadRow();
         const bodyRows = this.store.getItems().map(item => this.renderBodyRow(item));
-        const ulist = { tagName: 'ul', attributes: this.listConfig.attributes, children: [headRow, ...bodyRows] };
+        const ulist = { tagName: 'ul', attributes: this.listConfig.attributes, children: [ ...bodyRows] };
         return { tagName: 'div', attributes: { className: 'table-container' }, children: [ulist] };
     }
 
-    renderHeadRow = () => {
+    renderHeadRow = () => { 
         const libox = this.listConfig.columns.map(column => {
             const ul = this.renderListHeadRow(column);
             return ul;
         });
-        const actionLiBox = { tagName: 'div', children: ['Actions'] };
-        return { tagName: 'li', children: [...libox, actionLiBox] };
+        const actionLiBox = { tagName: 'div', children: ['Actions'], attributes: { className: 'enabling' }};
+        const checkLiBox = { tagName: 'div', children: ['Is Done'], attributes: { className: 'enabling' }};
+        return { tagName: 'li', children: [checkLiBox,...libox, actionLiBox] };
     }   
 
     renderBodyRow = (item) => {
@@ -34,14 +36,16 @@ export class GenericTableComponent extends BaseComponent {
             return ul;
         });
         
-        //const editAction = { tagName: 'button', attributes: { className: 'edit-btn', onclick: () => this.store.setCurrentItem(item) }, children: ['edit'] };
-        const deleteAction = { tagName: 'button', attributes: { className: 'delete-btn', onclick: () => this.store.delete(item) }, children: ['delete'] };
-
-        const actions = [/* editAction, */ deleteAction];
-        const actionLiBox = this.renderUlLi({}, actions);
-        return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [...libox, actionLiBox] };
+        const deleteAction = { tagName: 'i', attributes: { className: 'fas fa-trash-alt', onclick: () => this.store.delete(item) }};
+        const checkBox = { tagName: 'input', attributes: { type: 'checkbox', className: 'myCheck'} };
+        const actionLiBox = this.renderUlLi({}, [deleteAction]);
+        const checkLiBox = this.renderUlLi({}, [checkBox]);
+/*         if(item.isDone === "false"){console.log("0");}
+        if(item.isDone === "true"){console.log("1");} */
+        console.log(item);
+        return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [checkLiBox, ...libox, actionLiBox] };
     }
-
+                       // checkBox
     renderUlLi = (attributes, children) => {
         return { tagName: 'div', attributes, children };
     }
@@ -66,12 +70,13 @@ export class GenericTableComponent extends BaseComponent {
     }
 
     renderForm = () => {
+
         const item = this.store.currentItem;
 
         const { formFields } = this.listConfig;
 
         const children = [
-            { tagName: 'h2', children: 'Edit Form'}
+            { tagName: 'h2', children: 'Edit Form', attributes: { className: 'title' }, getCellValue: "TO DO LIST"},
         ];
 
         formFields.forEach(fieldAttributes => {
@@ -87,22 +92,31 @@ export class GenericTableComponent extends BaseComponent {
         children.push(
             { 
                 tagName: 'button', 
-                attributes: { type: 'button', onclick: () => this.store.setCurrentItem() }, 
+                attributes: { type: 'button', 
+                onclick: () => this.store.setCurrentItem() }, 
                 children: ['Cancel'] 
             },
+/*             { 
+                tagName: 'input', 
+                attributes: { type: 'checkbox'} 
+            }, */
             { 
                 tagName: 'input',  
                 attributes: { value: 'Save', type: 'submit' } 
-            }
+            },
+            this.renderSearchBar(),
+            this.renderHeadRow()
         );
-
         const form = { 
             tagName: 'form', 
             attributes: { onsubmit: this.store.onSubmit }, 
-            children 
+            children
         };
 
-        return { tagName: 'div', attributes: { className: 'add-edit-form' }, children: [form] }; 
+        return { 
+            tagName: 'div', 
+            attributes: { className: 'add-edit-form' }, 
+            children: [form] }; 
     }
 
     renderSearchBar = () => {
@@ -112,7 +126,7 @@ export class GenericTableComponent extends BaseComponent {
             children: [
                 { 
                     tagName: 'input', 
-                    attributes: { placeholder: 'search', value: this.store.searchTerm, onkeyup: this.store.onSearch } 
+                    attributes: { placeholder: 'search', className: 'search', value: this.store.searchTerm, onkeyup: this.store.onSearch } 
                 }
             ]
         };
@@ -132,7 +146,6 @@ export class GenericTableComponent extends BaseComponent {
     }
     render() {
         const children = [
-            this.renderSearchBar(),
             this.renderAddButton(),
             this.renderUl()
         ];

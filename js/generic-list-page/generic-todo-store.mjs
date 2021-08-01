@@ -87,14 +87,11 @@ export class GenericlistStore {
         this.setItems(this.items.filter(item => item.id !== deletedItem.id));
     }
 
-    // --- Helper methods for item list ---
-
     getItems() {
         if (!this.searchTerm) { return this.items; }
         return this.items.filter(item => this.listConfig.searchFilter(this.searchTerm, item));
     }
 
-    // set item + refresh the component
     setItems(items) {
         this.items = items;
         if (this.refreshCb) {
@@ -130,7 +127,7 @@ export class GenericlistStore {
         }
     }
 
-    onSubmit = (event) => {  //add item-hez
+    onSubmit = (event) => {  
         event.preventDefault();
         event.stopPropagation();
         const inputList = Array.from(event.target.querySelectorAll(`input[name]`));

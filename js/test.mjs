@@ -1,7 +1,6 @@
 // test purpose
 
 class Task {
-    // we list property names for our self, so we know what property should have this object
     id = undefined;
     title = undefined;
     isDone = undefined;
@@ -9,16 +8,13 @@ class Task {
     createdAt = undefined;
 
     constructor(initData) {
-        // check if we have initial data
         if (typeof initData !== 'object') { return; }
-        // go over the initData propertyNames
         Object.keys(initData)
             .filter(propertyName => this.hasOwnProperty(propertyName))
             .forEach(propertyName => this[propertyName] = initData[propertyName]);
     }
 }
 
-// we create a list config
 const listConfig = {
     model: Task,
     endpoint: 'https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/todos/',

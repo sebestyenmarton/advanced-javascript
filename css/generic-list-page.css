@@ -77,6 +77,15 @@ html body .generic-list-page .add-edit-form {
   border-radius: 10px;
 }
 
+@media screen and (max-width: 650px) {
+  html body .generic-list-page .add-edit-form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 html body .generic-list-page .add-edit-form .titlebox {
   display: -webkit-box;
   display: -ms-flexbox;

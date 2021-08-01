@@ -2,19 +2,15 @@ import { GenericlistComponent } from './generic-list-page/generic-todo-component
 import { GenericlistStore } from './generic-list-page/generic-todo-store.mjs';
 import { Employee } from './Todo.mjs';
 
-// condition when page is ready then call init, else create event listener which wait till the page is loaded
 if (document.readyState === 'complete') {
     this.init();
 } else {
     window.addEventListener('load', init);
 }
 
-// application start here
-function init() {
-    // remove event listener, we not need anymore
-    window.removeEventListener('load', init);
 
-    // we create a list config
+function init() {
+    window.removeEventListener('load', init);
     const listConfig = {
         model: Employee,
         endpoint: 'https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/todos/',
@@ -24,7 +20,7 @@ function init() {
             { placeholder: 'Due Date', name: 'dueDate', type: 'text', required: true },
         ],
         beforeFormSubmit: (data) => {
-            data.salary = parseInt(data.salary);  //átalakítja ,pl ha '1'az adat, akkor 1-re alakítja
+            data.salary = parseInt(data.salary);  
             data.createdAt = new Date();
             return data;
         },
@@ -37,13 +33,6 @@ function init() {
             return false;
         },
         columns: [
-/*             {
-                id: 'isDone',
-                label: 'Is Done',
-                getCellValue: (user) => user.isDone,
-                attributes: {},
-                sorter: (user1, user2) => user1.isDone.localeCompare(user2.isDone)
-            },   */
             {
                 id: 'title',
                 label: 'Title',
@@ -58,33 +47,11 @@ function init() {
                 attributes: {},
                 sorter: (user1, user2) => new Date (user1.dueDate).getTime() > new Date(user2.dueDate).getTime() ? 1 : -1
             },
-
-/*             {
-                id: 'id',
-                label: 'Id',
-                getCellValue: (user) => user.id,
-                attributes: {},
-                sorter: (user1, user2) => user1.id.localeCompare(user2.id)
-            },
-            {
-                id: 'createdAt',
-                label: 'Created at',
-                getCellValue: (user) => user.createdAt instanceof Date ? user.createdAt.toISOString().substr(0, 19).replace('T', ' ') : (user.createdAt || '-'),
-                attributes: {},
-                sorter: (user1, user2) => new Date (user1.createdAt).getTime() > new Date(user2.createdAt).getTime() ? 1 : -1
-            }, */  
         ]
     };
 
-    // search four our parent element, where we will insert our list component
     const parentElement = document.querySelector('#root');
-
-    // list store, handle CRUD and logic
     const listStore = new GenericlistStore(listConfig);
-
-    // initialize the list component
     const cmp = new GenericlistComponent(listStore);
-
-    // mount into parent element
     cmp.mount(parentElement);
 }

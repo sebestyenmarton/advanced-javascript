@@ -14,7 +14,6 @@ export class GenericlistComponent extends BaseComponent {
     }
 
     renderUl = () => {
-        //const headRow = this.renderHeadRow();
         const bodyRows = this.store.getItems().map(item => this.renderBodyRow(item));
         const ulist = { tagName: 'ul', attributes: this.listConfig.attributes, children: [ ...bodyRows] };
         return { tagName: 'div', attributes: { className: 'list-container' }, children: [ulist] };
@@ -40,8 +39,7 @@ export class GenericlistComponent extends BaseComponent {
         const checkBox = { tagName: 'input', attributes: { type: 'checkbox', className: 'myCheck'} };
         const actionLiBox = this.renderUlLi({}, [deleteAction]);
         const checkLiBox = this.renderUlLi({}, [checkBox]);
-/*         if(item.isDone === "false"){console.log("0");}
-        if(item.isDone === "true"){console.log("1");} */
+
         console.log(item);
         return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [checkLiBox, ...libox, actionLiBox] };
     }
@@ -99,7 +97,6 @@ export class GenericlistComponent extends BaseComponent {
                 onclick: () => this.store.setCurrentItem() }, 
                 children: ['Cancel'] 
             },
-/*             { tagName: 'input', attributes: { type: 'checkbox'} }, */
             { 
                 tagName: 'input',  
                 attributes: { className: 'buttons', value: 'Save', type: 'submit' } 

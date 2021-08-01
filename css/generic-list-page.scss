@@ -48,6 +48,9 @@ html{
         background-repeat: no-repeat; 
         background-size: cover;
         border-radius: 10px;
+        @media screen and (max-width: 650px){
+          flex-direction: column;
+        }
         .titlebox{
           display: flex;
           justify-content: center;
@@ -72,7 +75,6 @@ html{
             left: 10px;
             top: -18px;
             opacity: 100%;
-            //box-shadow: 4px 4px 12px 12px rgba(0,0,0,.20);
             @media screen and (max-width: 850px){
               width: 120px;
               top: 0;

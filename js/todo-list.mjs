@@ -1,5 +1,5 @@
-import { GenericTableComponent } from './generic-list/generic-todo-component.mjs';
-import { GenericTableStore } from './generic-list/generic-todo-store.mjs';
+import { GenericlistComponent } from './generic-list-page/generic-todo-component.mjs';
+import { GenericlistStore } from './generic-list-page/generic-todo-store.mjs';
 import { Employee } from './Todo.mjs';
 
 // condition when page is ready then call init, else create event listener which wait till the page is loaded
@@ -14,7 +14,7 @@ function init() {
     // remove event listener, we not need anymore
     window.removeEventListener('load', init);
 
-    // we create a table config
+    // we create a list config
     const listConfig = {
         model: Employee,
         endpoint: 'https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/todos/',
@@ -76,14 +76,14 @@ function init() {
         ]
     };
 
-    // search four our parent element, where we will insert our table component
+    // search four our parent element, where we will insert our list component
     const parentElement = document.querySelector('#root');
 
-    // table store, handle CRUD and logic
-    const tableStore = new GenericTableStore(listConfig);
+    // list store, handle CRUD and logic
+    const listStore = new GenericlistStore(listConfig);
 
-    // initialize the table component
-    const cmp = new GenericTableComponent(tableStore);
+    // initialize the list component
+    const cmp = new GenericlistComponent(listStore);
 
     // mount into parent element
     cmp.mount(parentElement);

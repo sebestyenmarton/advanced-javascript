@@ -15,8 +15,8 @@ export class BaseComponent {
             }
         }
         const { tagName, attributes, children } = data; 
-            //= const { div, className: 'generic-table', 
-            // [ renderSearchBar(),renderAddButton(),renderUl() ]}; from generic-table-component
+            //= const { div, className: 'generic-list-page', 
+            // [ renderSearchBar(),renderAddButton(),renderUl() ]}; from generic-list-page-component
         const element = document.createElement(tagName.toUpperCase());
         if (typeof attributes === 'object') {
             for (let attributeName in attributes) {

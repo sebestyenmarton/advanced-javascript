@@ -18,7 +18,7 @@ class Task {
     }
 }
 
-// we create a table config
+// we create a list config
 const listConfig = {
     model: Task,
     endpoint: 'https://60fd9bcc1fa9e90017c70f18.mockapi.io/api/todos/',

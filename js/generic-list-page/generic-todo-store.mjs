@@ -8,11 +8,11 @@ function guid() {
 
 export const SORT_DIRECTION = ['ASC', 'DESC'];
 
-export class GenericTableStore {
+export class GenericlistStore {
     refreshCb = null;           // function
-    listConfig = null;         // table config
+    listConfig = null;         // list config
     currentItem = 1;         // current item for add and edit
-    sortableColumns = [];       // which columns should be sorted
+    sorlistColumns = [];       // which columns should be sorted
     currentSort = [];           // [id, direction]
     searchTerm = '';            // search term
     items = [];                 // unfiltred items
@@ -23,9 +23,9 @@ export class GenericTableStore {
     }
 
     init() {
-        const firstSortableColumn = this.listConfig.columns.find(x => x.sorter);
-        if (firstSortableColumn) {
-            this.setSort(firstSortableColumn.id);
+        const firstSorlistColumn = this.listConfig.columns.find(x => x.sorter);
+        if (firstSorlistColumn) {
+            this.setSort(firstSorlistColumn.id);
         }
         this.getList();
         

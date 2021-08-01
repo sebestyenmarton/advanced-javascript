@@ -2,7 +2,7 @@ import { SORT_DIRECTION } from './generic-todo-store.mjs';
 import { BaseComponent } from '../core/base-component.mjs';
 
 
-export class GenericTableComponent extends BaseComponent {
+export class GenericlistComponent extends BaseComponent {
     listConfig = null;
     store = null;
 
@@ -17,7 +17,7 @@ export class GenericTableComponent extends BaseComponent {
         //const headRow = this.renderHeadRow();
         const bodyRows = this.store.getItems().map(item => this.renderBodyRow(item));
         const ulist = { tagName: 'ul', attributes: this.listConfig.attributes, children: [ ...bodyRows] };
-        return { tagName: 'div', attributes: { className: 'table-container' }, children: [ulist] };
+        return { tagName: 'div', attributes: { className: 'list-container' }, children: [ulist] };
     }
 
     renderHeadRow = () => { 
@@ -52,7 +52,7 @@ export class GenericTableComponent extends BaseComponent {
 
     renderListHeadRow = (column) => {
         const [ASC] = SORT_DIRECTION;
-        const attributes = Object.assign({ className: 'sortable' }, column.attributes);
+        const attributes = Object.assign({ className: 'sorlist' }, column.attributes);
         const children = [
             { tagName: 'span', attributes: column.attributes, children: [column.label] }
         ];
@@ -72,11 +72,12 @@ export class GenericTableComponent extends BaseComponent {
     renderForm = () => {
 
         const item = this.store.currentItem;
-
         const { formFields } = this.listConfig;
+        const descriptionText = "Let's Start Planning!";
+        const titleText = "TO DO LIST";
 
         const children = [
-            { tagName: 'h2', children: 'Edit Form', attributes: { className: 'title' }, getCellValue: "TO DO LIST"},
+            { tagName: 'h3', children: [descriptionText], attributes: { className: 'title' }},
         ];
 
         formFields.forEach(fieldAttributes => {
@@ -96,10 +97,7 @@ export class GenericTableComponent extends BaseComponent {
                 onclick: () => this.store.setCurrentItem() }, 
                 children: ['Cancel'] 
             },
-/*             { 
-                tagName: 'input', 
-                attributes: { type: 'checkbox'} 
-            }, */
+/*             { tagName: 'input', attributes: { type: 'checkbox'} }, */
             { 
                 tagName: 'input',  
                 attributes: { value: 'Save', type: 'submit' } 
@@ -113,17 +111,29 @@ export class GenericTableComponent extends BaseComponent {
             children
         };
 
+
         return { 
             tagName: 'div', 
             attributes: { className: 'add-edit-form' }, 
-            children: [form] }; 
+            children: [ 
+                { tagName: 'div', attributes: { className: 'titletext' }, children: [
+                    { tagName: 'h2', attributes: { className: 'titletext' }, children: [titleText]},
+                    { tagName: 'img', attributes: { src: "../../img/ToDoIcon2.png", alt: 'To do image' }},
+                ]},
+                form,
+            ]}; 
     }
 
     renderSearchBar = () => {
+        const searchText = "Search for an existing plan:";
         return { 
             tagName: 'div', 
             attribtues: { className: 'search-container' }, 
             children: [
+                {
+                    tagName: 'h3', 
+                    attributes: { className: 'cearchText' }, children: [searchText]
+                },
                 { 
                     tagName: 'input', 
                     attributes: { placeholder: 'search', className: 'search', value: this.store.searchTerm, onkeyup: this.store.onSearch } 
@@ -152,6 +162,6 @@ export class GenericTableComponent extends BaseComponent {
          if (this.store.currentItem) {
             children.unshift(this.renderForm());
         } 
-        return this.renderElement({ tagName: 'div', attributes: { className: 'generic-table' }, children });
+        return this.renderElement({ tagName: 'div', attributes: { className: 'generic-list-page' }, children });
     }
 }

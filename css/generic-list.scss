@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
-.myCheck{
 
-}
 
 * {
     outline: none;
@@ -12,36 +10,74 @@
     box-sizing: border-box;
 }
 
-html, body {
+html{
+  height: 100%;
+  width: 100%;
+  body {
     height: 100%;
     width: 100%;
-}
-
-body {
     padding-top: 32px;
     background: rgb(76,94,168);
-    background: linear-gradient(60deg, rgba(76,94,168,1) 0%, rgba(239,90,154,1) 100%);      }
-
-.generic-table {
-    max-width: 750px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    max-width: 1280px;
-    margin: auto;
-    font-size: 14px;
-    background: #ffffff60;
-    border-radius: 10px;
-    padding: 0;
-    box-shadow: 4px 4px 12px 12px rgb(0 0 0 / 12%);
+    background: linear-gradient(60deg, rgba(76,94,168,1) 0%, rgba(239,90,154,1) 100%);      
+    .generic-list-page {
+      max-width: 750px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      max-width: 1280px;
+      margin: auto;
+      font-size: 14px;
+      background: #ffffff60;
+      border-radius: 10px;
+      padding: 0;
+      box-shadow: 4px 4px 12px 12px rgba(0,0,0,.12);
+      .add-edit-form {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff90;
+        border-radius: 10px;
+        form {
+          padding: 24px;
+          background-color: #00000010;
+          margin: 20px;
+          input:not([type="submit"]) {
+            display: block;
+            margin-bottom: 8px;
+          }
+          h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            background: -webkit-linear-gradient(#eee, #333);
+            font-size: 32px;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      }
+      .add-container{
+        
+      }
+      .list-container{
+        
+      }
+    }
+  }
 }
+
+
+
+
 li:first-of-type{
     display: flex;
 }
 .enabling{
     display: none;
 }
-.sortable{
+.sorlist{
     position: relative;
     left: -10px;
     top: 20px;
@@ -54,36 +90,36 @@ li:first-of-type{
     top: 20px;
 }
 
-.generic-table input {
+.generic-list-page input {
     padding: 8px 18px;
     border-radius: 10px;
     border: 0px;
 }
-.generic-table input:nth-of-type(4) {
+.generic-list-page input:nth-of-type(4) {
     top: -22px;
     left: 40px;
     position: relative;
 }
-.generic-table input:nth-of-type(4) {
+.generic-list-page input:nth-of-type(4) {
     top: -22px;
     left: 40px;
     position: relative;
 }
 
-.generic-table > div {
+.generic-list-page > div {
     padding: 0 16px;
 }
 
-.generic-table .search-container {
+.generic-list-page .search-container {
     text-align: left;
     padding-top: 18px;
 }
 
-.generic-table .add-container {
+.generic-list-page .add-container {
     text-align: right;
 }
 
-.generic-table .add-container button {
+.generic-list-page .add-container button {
     position: relative;
     top: -67px;
     left: 90px;
@@ -99,13 +135,13 @@ li:first-of-type{
     font-size: 0;
 }
 
-.generic-table .add-container button:hover {
+.generic-list-page .add-container button:hover {
     background: radial-gradient(#ff3333, #ffdddd);
     border: 1px solid rgba(0,0,0,.25);
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, .15);
 }
 
-.generic-table .add-container button:active {
+.generic-list-page .add-container button:active {
     top: 1px;
     left: 1px;
     background: radial-gradient(#ff0000, #ffbbbb);
@@ -113,7 +149,7 @@ li:first-of-type{
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, .25);
 }
 
-.generic-table .add-container button::after {
+.generic-list-page .add-container button::after {
     content: '+';
     color: white;
     position: absolute;
@@ -123,69 +159,69 @@ li:first-of-type{
     text-shadow: 0 0 2px #000;
 }
 
-.generic-table .table-container {
-    grid-area: table;
+.generic-list-page .list-container {
+    grid-area: list;
     width: 100%;
     overflow: auto;
     max-height: calc(100vh - 125px);
     padding: 0;
 }
 
-.generic-table ul {
+.generic-list-page ul {
     border: 1px solid rgba(0,0,0,.25);
     border-collapse: collapse;
     margin: 0 16px;
     width: calc(100% - 32px);
 }
 
-.generic-table ul li {
+.generic-list-page ul li {
     border: 1px solid rgba(0,0,0,.25);
     background: linear-gradient(to top, #eeeeee90, #ffffff90);
 }
 
 
-.generic-table ul li:not(:first-child):hover {
+.generic-list-page ul li:not(:first-child):hover {
     background: linear-gradient(to top, #ddd, #eee);
 }
 
-.generic-table ul li{
+.generic-list-page ul li{
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
 }
 
-/* .generic-table ul li div:nth-of-type(1n+0){
+/* .generic-list-page ul li div:nth-of-type(1n+0){
     grid-area: isdone;
     display: flex;
     max-width: 28px;
     height: 28px;
 } */
-.generic-table ul li div:nth-of-type(2n+0){
+.generic-list-page ul li div:nth-of-type(2n+0){
 
     display: flex;
     align-items: center;
     min-width: 120px;
 }
-/* .generic-table ul li div:nth-of-type(3n+0){
+/* .generic-list-page ul li div:nth-of-type(3n+0){
     grid-area: duedate;
 }
-.generic-table ul li div:nth-of-type(4n+0){
+.generic-list-page ul li div:nth-of-type(4n+0){
     grid-area: edit;
 } */
 
-.generic-table ul li.sortable {
+.generic-list-page ul li.sorlist {
     position: relative;
     cursor: pointer;
 }
 
-.generic-table ul li i {
+.generic-list-page ul li i {
     margin-right: 6px;
     cursor: pointer;
     padding: 4px 8px;
 }
 
 
-.generic-table ul li .sort-arrow {
+.generic-list-page ul li .sort-arrow {
     position: relative;
     transform: translate(3px, -10px);
     color: blue;
@@ -194,48 +230,18 @@ li:first-of-type{
     left: 6px;
 }
 
-.generic-table .add-edit-form {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff90;
-    border-radius: 10px;
-}
 
-.generic-table .add-edit-form form {
-    padding: 24px;
-    background-color: #00000010;
-    margin: 20px;
-}
-
-.generic-table .add-edit-form form h2 {
-    text-align: center;
-    margin-bottom: 10px;
-    background: -webkit-linear-gradient(#eee, #333);
-    font-size: 32px;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.generic-table .add-edit-form form input:not([type="submit"]) {
-    display: block;
-    margin-bottom: 8px;
-}
-
-.generic-table input:not([type="submit"]) {
+.generic-list-page input:not([type="submit"]) {
     transition: 0,3 ease;
 }
 
-.generic-table input:not([type="submit"]):focus {
+.generic-list-page input:not([type="submit"]):focus {
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .20);
     background: rgba(255,255,200,0.8);
 }
 
-.generic-table .add-edit-form form input[type="submit"],
-.generic-table .add-edit-form form button[type="button"] {
+.generic-list-page .add-edit-form form input[type="submit"],
+.generic-list-page .add-edit-form form button[type="button"] {
     padding: 4px 8px;
     border-radius: 4px;
     background: white;
@@ -248,32 +254,32 @@ li:first-of-type{
     font-weight: bolder;
 }
 
-.generic-table .add-edit-form form input[type="submit"] {
+.generic-list-page .add-edit-form form input[type="submit"] {
     float: left;
     background: linear-gradient(to bottom, #fff, #aaf);
 }
 
-.generic-table .add-edit-form form button[type="button"] {
+.generic-list-page .add-edit-form form button[type="button"] {
     float: right;
     background: linear-gradient(to bottom, #fff, #aaa);
 }
 
-.generic-table .add-edit-form form input[type="submit"]:hover {
+.generic-list-page .add-edit-form form input[type="submit"]:hover {
     background: linear-gradient(to bottom, #fff, #bbf);
 }
 
-.generic-table .add-edit-form form button[type="button"]:hover {
+.generic-list-page .add-edit-form form button[type="button"]:hover {
     background: linear-gradient(to bottom, #fff, #bbb);
 }
 
-.generic-table .add-edit-form form input[type="submit"]:active {
+.generic-list-page .add-edit-form form input[type="submit"]:active {
     position: relative;
     top: 1px;
     left: 1px;
     background: linear-gradient(to bottom, #fff, #99f);
 }
 
-.generic-table .add-edit-form form button[type="button"]:active {
+.generic-list-page .add-edit-form form button[type="button"]:active {
     position: relative;
     top: 1px;
     left: 1px;

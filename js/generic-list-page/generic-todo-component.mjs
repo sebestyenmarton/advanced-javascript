@@ -74,7 +74,7 @@ export class GenericlistComponent extends BaseComponent {
         const item = this.store.currentItem;
         const { formFields } = this.listConfig;
         const descriptionText = "Let's Start Planning!";
-        const titleText = "TO DO LIST";
+        const titleText = "To do list";
 
         const children = [
             { tagName: 'h3', children: [descriptionText], attributes: { className: 'title' }},
@@ -116,7 +116,7 @@ export class GenericlistComponent extends BaseComponent {
             tagName: 'div', 
             attributes: { className: 'add-edit-form' }, 
             children: [ 
-                { tagName: 'div', attributes: { className: 'titletext' }, children: [
+                { tagName: 'div', attributes: { className: 'titlebox' }, children: [
                     { tagName: 'h2', attributes: { className: 'titletext' }, children: [titleText]},
                     { tagName: 'img', attributes: { src: "../../img/ToDoIcon2.png", alt: 'To do image' }},
                 ]},
@@ -132,11 +132,11 @@ export class GenericlistComponent extends BaseComponent {
             children: [
                 {
                     tagName: 'h3', 
-                    attributes: { className: 'cearchText' }, children: [searchText]
+                    attributes: { className: 'searchText' }, children: [searchText]
                 },
                 { 
                     tagName: 'input', 
-                    attributes: { placeholder: 'search', className: 'search', value: this.store.searchTerm, onkeyup: this.store.onSearch } 
+                    attributes: { placeholder: 'search', className: 'searchbar', value: this.store.searchTerm, onkeyup: this.store.onSearch } 
                 }
             ]
         };

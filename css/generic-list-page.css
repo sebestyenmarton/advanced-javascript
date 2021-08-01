@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
 * {
   outline: none;
   margin: 0;
@@ -11,18 +13,24 @@
 html {
   height: 100%;
   width: 100%;
+  background: #4c5ea8;
+  background: linear-gradient(60deg, #c7d8e2 0%, rgba(239, 90, 154, 0.5) 100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 html body {
   height: 100%;
   width: 100%;
   padding-top: 32px;
-  background: #4c5ea8;
-  background: linear-gradient(60deg, #4c5ea8 0%, #ef5a9a 100%);
+  margin: 0 32px;
 }
 
 html body .generic-list-page {
-  max-width: 750px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -33,14 +41,20 @@ html body .generic-list-page {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: auto;
   font-size: 14px;
-  background: #ffffff60;
+  font-weight: 700;
+  background: #ffffff50;
   border-radius: 10px;
-  padding: 0;
   -webkit-box-shadow: 4px 4px 12px 12px rgba(0, 0, 0, 0.12);
           box-shadow: 4px 4px 12px 12px rgba(0, 0, 0, 0.12);
+}
+
+html body .generic-list-page input {
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 0px;
 }
 
 html body .generic-list-page .add-edit-form {
@@ -55,19 +69,128 @@ html body .generic-list-page .add-edit-form {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #ffffff90;
+  background-image: url("../img/background2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 10px;
 }
 
+html body .generic-list-page .add-edit-form .titlebox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 80px;
+}
+
+@media screen and (max-width: 850px) {
+  html body .generic-list-page .add-edit-form .titlebox {
+    padding-right: 20px;
+  }
+}
+
+html body .generic-list-page .add-edit-form .titlebox .titletext {
+  font-size: 90px;
+  font-weight: 400;
+  font-family: 'Style Script', cursive;
+  color: #fff;
+}
+
+@media screen and (max-width: 850px) {
+  html body .generic-list-page .add-edit-form .titlebox .titletext {
+    font-size: 60px;
+  }
+}
+
+html body .generic-list-page .add-edit-form .titlebox img {
+  width: 150px;
+  position: relative;
+  left: 10px;
+  top: -18px;
+  opacity: 100%;
+  -webkit-box-shadow: 4px 4px 12px 12px rgba(0, 0, 0, 0.2);
+          box-shadow: 4px 4px 12px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 850px) {
+  html body .generic-list-page .add-edit-form .titlebox img {
+    width: 120px;
+    top: 0;
+  }
+}
+
 html body .generic-list-page .add-edit-form form {
-  padding: 24px;
+  padding: 10px 50px;
+  padding-bottom: 60px;
   background-color: #00000010;
   margin: 20px;
+}
+
+html body .generic-list-page .add-edit-form form .title {
+  font-family: 'Mukta', sans-serif;
+  font-weight: 800;
+  color: #f4f4f4;
+  font-size: 20px;
+  padding: 10px 5px;
+}
+
+html body .generic-list-page .add-edit-form form li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  top: 5px;
+  left: 50px;
+}
+
+html body .generic-list-page .add-edit-form form li span:first-of-type {
+  color: #f4f4f4;
+  font-family: 'Mukta', sans-serif;
+  font-weight: 600;
+  padding-right: 7px;
+}
+
+html body .generic-list-page .add-edit-form form li span:last-of-type {
+  position: relative;
+  top: 10px;
+  color: #f4f4f4;
+  font-family: 'Mukta', sans-serif;
+  font-weight: 600;
+}
+
+html body .generic-list-page .add-edit-form form li .sort-arrow {
+  font-size: 10px;
+  -webkit-transform: translate(3px, -10px);
+          transform: translate(3px, -10px);
+  color: rgba(239, 90, 154, 0.7);
+  font-size: 24px;
+}
+
+html body .generic-list-page .add-edit-form form li .enabling {
+  display: none;
 }
 
 html body .generic-list-page .add-edit-form form input:not([type="submit"]) {
   display: block;
   margin-bottom: 8px;
+  -webkit-transition: 0,3 ease;
+  transition: 0,3 ease;
+}
+
+html body .generic-list-page .add-edit-form form input:not([type="submit"]):focus {
+  -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 200, 0.8);
 }
 
 html body .generic-list-page .add-edit-form form h2 {
@@ -80,63 +203,27 @@ html body .generic-list-page .add-edit-form form h2 {
   -webkit-text-fill-color: transparent;
 }
 
-li:first-of-type {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.enabling {
-  display: none;
-}
-
-.sorlist {
+html body .generic-list-page .add-edit-form form div .searchText {
+  display: inline-block;
+  font-family: 'Mukta', sans-serif;
+  font-weight: 600;
+  color: #f4f4f4;
+  font-size: 15px;
+  padding: 0 10px;
   position: relative;
-  left: -10px;
-  top: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 10px 10px;
+  top: 18px;
 }
 
-.search {
+html body .generic-list-page .add-edit-form form div .searchbar {
   position: relative;
   top: 20px;
 }
 
-.generic-list-page input {
-  padding: 8px 18px;
-  border-radius: 10px;
-  border: 0px;
-}
-
-.generic-list-page input:nth-of-type(4) {
-  top: -22px;
-  left: 40px;
-  position: relative;
-}
-
-.generic-list-page input:nth-of-type(4) {
-  top: -22px;
-  left: 40px;
-  position: relative;
-}
-
-.generic-list-page > div {
-  padding: 0 16px;
-}
-
-.generic-list-page .search-container {
-  text-align: left;
-  padding-top: 18px;
-}
-
-.generic-list-page .add-container {
+html body .generic-list-page .add-container {
   text-align: right;
 }
 
-.generic-list-page .add-container button {
+html body .generic-list-page .add-container button {
   position: relative;
   top: -67px;
   left: 90px;
@@ -154,14 +241,14 @@ li:first-of-type {
   font-size: 0;
 }
 
-.generic-list-page .add-container button:hover {
+html body .generic-list-page .add-container button:hover {
   background: radial-gradient(#ff3333, #ffdddd);
   border: 1px solid rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.15);
 }
 
-.generic-list-page .add-container button:active {
+html body .generic-list-page .add-container button:active {
   top: 1px;
   left: 1px;
   background: radial-gradient(#ff0000, #ffbbbb);
@@ -170,7 +257,7 @@ li:first-of-type {
           box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.25);
 }
 
-.generic-list-page .add-container button::after {
+html body .generic-list-page .add-container button::after {
   content: '+';
   color: white;
   position: absolute;
@@ -181,7 +268,7 @@ li:first-of-type {
   text-shadow: 0 0 2px #000;
 }
 
-.generic-list-page .list-container {
+html body .generic-list-page .list-container {
   grid-area: list;
   width: 100%;
   overflow: auto;
@@ -189,25 +276,17 @@ li:first-of-type {
   padding: 0;
 }
 
-.generic-list-page ul {
+html body .generic-list-page .list-container ul {
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-collapse: collapse;
   margin: 0 16px;
   width: calc(100% - 32px);
 }
 
-.generic-list-page ul li {
+html body .generic-list-page .list-container ul li {
   border: 1px solid rgba(0, 0, 0, 0.25);
   background: -webkit-gradient(linear, left bottom, left top, from(#eeeeee90), to(#ffffff90));
   background: linear-gradient(to top, #eeeeee90, #ffffff90);
-}
-
-.generic-list-page ul li:not(:first-child):hover {
-  background: -webkit-gradient(linear, left bottom, left top, from(#ddd), to(#eee));
-  background: linear-gradient(to top, #ddd, #eee);
-}
-
-.generic-list-page ul li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -217,13 +296,18 @@ li:first-of-type {
   padding: 8px 16px;
 }
 
-/* .generic-list-page ul li div:nth-of-type(1n+0){
-    grid-area: isdone;
-    display: flex;
-    max-width: 28px;
-    height: 28px;
-} */
-.generic-list-page ul li div:nth-of-type(2n+0) {
+html body .generic-list-page .list-container ul li:first-of-type {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html body .generic-list-page .list-container ul li:not(:first-child):hover {
+  background: -webkit-gradient(linear, left bottom, left top, from(#ddd), to(#eee));
+  background: linear-gradient(to top, #ddd, #eee);
+}
+
+html body .generic-list-page .list-container ul li div:nth-of-type(2n+0) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -233,46 +317,25 @@ li:first-of-type {
   min-width: 120px;
 }
 
-/* .generic-list-page ul li div:nth-of-type(3n+0){
-    grid-area: duedate;
-}
-.generic-list-page ul li div:nth-of-type(4n+0){
-    grid-area: edit;
-} */
-.generic-list-page ul li.sorlist {
-  position: relative;
-  cursor: pointer;
-}
-
-.generic-list-page ul li i {
+html body .generic-list-page .list-container ul li div i {
   margin-right: 6px;
   cursor: pointer;
   padding: 4px 8px;
 }
 
-.generic-list-page ul li .sort-arrow {
+html body .generic-list-page .list-container ul li .sorlist {
   position: relative;
-  -webkit-transform: translate(3px, -10px);
-          transform: translate(3px, -10px);
-  color: blue;
-  font-size: 24px;
-  top: 6px;
-  left: 6px;
+  left: -10px;
+  top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 10px;
+  position: relative;
+  cursor: pointer;
 }
 
-.generic-list-page input:not([type="submit"]) {
-  -webkit-transition: 0,3 ease;
-  transition: 0,3 ease;
-}
-
-.generic-list-page input:not([type="submit"]):focus {
-  -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-  background: rgba(255, 255, 200, 0.8);
-}
-
-.generic-list-page .add-edit-form form input[type="submit"],
-.generic-list-page .add-edit-form form button[type="button"] {
+.generic-list-page .add-edit-form form input[type="submit"], .generic-list-page .add-edit-form form button[type="button"] {
   padding: 4px 8px;
   border-radius: 4px;
   background: white;
@@ -322,4 +385,4 @@ li:first-of-type {
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#999));
   background: linear-gradient(to bottom, #fff, #999);
 }
-/*# sourceMappingURL=generic-list.css.map */
+/*# sourceMappingURL=generic-list-page.css.map */

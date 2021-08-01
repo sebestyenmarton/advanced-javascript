@@ -91,16 +91,18 @@ export class GenericlistComponent extends BaseComponent {
         });
 
         children.push(
+            this.renderAddButton(),
             { 
                 tagName: 'button', 
                 attributes: { type: 'button', 
+                className: 'buttons',
                 onclick: () => this.store.setCurrentItem() }, 
                 children: ['Cancel'] 
             },
 /*             { tagName: 'input', attributes: { type: 'checkbox'} }, */
             { 
                 tagName: 'input',  
-                attributes: { value: 'Save', type: 'submit' } 
+                attributes: { className: 'buttons', value: 'Save', type: 'submit' } 
             },
             this.renderSearchBar(),
             this.renderHeadRow()
@@ -118,7 +120,7 @@ export class GenericlistComponent extends BaseComponent {
             children: [ 
                 { tagName: 'div', attributes: { className: 'titlebox' }, children: [
                     { tagName: 'h2', attributes: { className: 'titletext' }, children: [titleText]},
-                    { tagName: 'img', attributes: { src: "../../img/ToDoIcon2.png", alt: 'To do image' }},
+                    { tagName: 'img', attributes: { src: "../../img/ToDoIcon.svg", alt: 'To do image' }},
                 ]},
                 form,
             ]}; 
@@ -148,7 +150,7 @@ export class GenericlistComponent extends BaseComponent {
             children: [
                 { 
                     tagName: 'button', 
-                    attributes: { onclick: () => this.store.setCurrentItem() }, 
+                    attributes: { className: 'buttons', onclick: () => this.store.setCurrentItem() }, 
                     children: ['+'] 
                 }
             ] 
@@ -156,7 +158,6 @@ export class GenericlistComponent extends BaseComponent {
     }
     render() {
         const children = [
-            this.renderAddButton(),
             this.renderUl()
         ];
          if (this.store.currentItem) {

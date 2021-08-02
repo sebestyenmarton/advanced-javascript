@@ -219,6 +219,13 @@ html body .generic-list-page .add-edit-form form li .enabling {
   display: none;
 }
 
+html body .generic-list-page .add-edit-form form > input:nth-of-type(1) {
+  margin-top: -25px;
+  position: relative;
+  left: 210px;
+  top: 54px;
+}
+
 html body .generic-list-page .add-edit-form form input:not([type="submit"]) {
   display: block;
   margin-bottom: 8px;

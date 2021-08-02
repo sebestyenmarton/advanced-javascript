@@ -148,6 +148,12 @@ html{
               display: none;
             }
           }
+          &>input:nth-of-type(1){
+            margin-top: -25px;
+            position: relative;
+            left: 210px;
+            top: 54px;
+          }
           input:not([type="submit"]) {
             display: block;
             margin-bottom: 8px;

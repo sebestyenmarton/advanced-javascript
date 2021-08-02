@@ -142,6 +142,7 @@ html body .generic-list-page .add-edit-form form {
   padding-bottom: 45px;
   background-color: #00000010;
   margin: 20px;
+  border-radius: 10px;
 }
 
 html body .generic-list-page .add-edit-form form .title {
@@ -179,6 +180,10 @@ html body .generic-list-page .add-edit-form form li {
   position: relative;
   top: 5px;
   left: 50px;
+}
+
+html body .generic-list-page .add-edit-form form li span .sorttext {
+  cursor: pointer;
 }
 
 html body .generic-list-page .add-edit-form form li span:first-of-type {
@@ -362,7 +367,7 @@ html body .generic-list-page .list-container ul li div i {
 }
 
 html body .generic-list-page .list-container ul li div input.myCheck {
-  margin-right: 30px;
+  margin-right: 15px;
 }
 
 html body .generic-list-page .list-container ul li .sorlist {

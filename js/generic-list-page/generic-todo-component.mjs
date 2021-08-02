@@ -43,7 +43,6 @@ export class GenericlistComponent extends BaseComponent {
         console.log(item);
         return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [checkLiBox, ...libox, actionLiBox] };
     }
-                       // checkBox
     renderUlLi = (attributes, children) => {
         return { tagName: 'div', attributes, children };
     }
@@ -52,7 +51,7 @@ export class GenericlistComponent extends BaseComponent {
         const [ASC] = SORT_DIRECTION;
         const attributes = Object.assign({ className: 'sorlist' }, column.attributes);
         const children = [
-            { tagName: 'span', attributes: column.attributes, children: [column.label] }
+            { tagName: 'span', attributes: column.attributes, children: [column.label],  attributes: { className: 'sorttext' } }
         ];
 
         const [sortId, direction] = this.store.currentSort;
@@ -157,7 +156,7 @@ export class GenericlistComponent extends BaseComponent {
         const children = [
             this.renderUl()
         ];
-         if (this.store.currentItem) {
+        if (this.store.currentItem) {
             children.unshift(this.renderForm());
         } 
         return this.renderElement({ tagName: 'div', attributes: { className: 'generic-list-page' }, children });

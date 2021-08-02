@@ -182,6 +182,10 @@ html body .generic-list-page .add-edit-form form li {
   left: 50px;
 }
 
+html body .generic-list-page .add-edit-form form li .sorlist:nth-of-type(2) span.sorttext {
+  display: none;
+}
+
 html body .generic-list-page .add-edit-form form li span .sorttext {
   cursor: pointer;
 }
@@ -297,7 +301,12 @@ html body .generic-list-page .add-container button:hover {
 }
 
 html body .generic-list-page .list-container {
-  grid-area: list;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -329,6 +338,7 @@ html body .generic-list-page .list-container ul li {
           justify-content: space-between;
   padding: 8px 16px;
   color: #323232;
+  margin: auto;
 }
 
 html body .generic-list-page .list-container ul li:first-of-type {
@@ -358,6 +368,26 @@ html body .generic-list-page .list-container ul li div:nth-of-type(2n+0) {
 
 html body .generic-list-page .list-container ul li div:nth-of-type(2n+1) {
   cursor: pointer;
+}
+
+html body .generic-list-page .list-container ul li div:nth-of-type(2n+2):hover {
+  color: #e2e2e2;
+}
+
+html body .generic-list-page .list-container ul li div:nth-of-type(2n+3):hover {
+  color: #e2e2e2;
+}
+
+html body .generic-list-page .list-container ul li div:nth-of-type(2n+4) {
+  display: border-box;
+  width: 29px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+html body .generic-list-page .list-container ul li div:nth-of-type(2n+4):hover {
+  color: #ddc18e;
 }
 
 html body .generic-list-page .list-container ul li div i {

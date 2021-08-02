@@ -117,6 +117,9 @@ html{
             position: relative;
             top: 5px;
             left: 50px;
+            .sorlist:nth-of-type(2) span.sorttext{
+              display: none;
+            }
             span{.sorttext{
               cursor: pointer;
             }}
@@ -218,7 +221,8 @@ html{
         }
       }
       .list-container{
-        grid-area: list;
+        display: flex;
+        justify-content: center;
         width: 100%;
         overflow-y: scroll;
         -ms-overflow-style: none;
@@ -241,6 +245,7 @@ html{
             justify-content: space-between;
             padding: 8px 16px;
             color: #323232;
+            margin: auto;
             &:first-of-type{
               display: flex;
             }
@@ -260,6 +265,20 @@ html{
               }
               &:nth-of-type(2n+1){
                 cursor: pointer;
+              }
+              &:nth-of-type(2n+2):hover{
+                color: #e2e2e2;
+              }
+              &:nth-of-type(2n+3):hover{
+                color: #e2e2e2;
+              }
+              &:nth-of-type(2n+4){
+                display: border-box;
+                width: 29px;
+                justify-content: center;
+                &:hover{
+                  color: #ddc18e;
+                }
               }
               i{
                 margin-right: 6px;

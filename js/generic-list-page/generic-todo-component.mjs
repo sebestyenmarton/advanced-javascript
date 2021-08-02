@@ -36,12 +36,10 @@ export class GenericlistComponent extends BaseComponent {
         });
         
         const deleteAction = { tagName: 'i', attributes: { className: 'fas fa-trash-alt', onclick: () => this.store.delete(item) }};
-        const checkBox = { tagName: 'input', attributes: { type: 'checkbox', className: 'myCheck'} };
         const actionLiBox = this.renderUlLi({}, [deleteAction]);
-        const checkLiBox = this.renderUlLi({}, [checkBox]);
 
         console.log(item);
-        return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [checkLiBox, ...libox, actionLiBox] };
+        return { tagName: 'li', attributes: { onclick: () => this.store.setCurrentItem(item) }, children: [...libox, actionLiBox] };
     }
     renderUlLi = (attributes, children) => {
         return { tagName: 'div', attributes, children };
@@ -152,6 +150,7 @@ export class GenericlistComponent extends BaseComponent {
             ] 
         };
     }
+
     render() {
         const children = [
             this.renderUl()

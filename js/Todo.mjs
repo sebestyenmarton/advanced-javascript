@@ -3,7 +3,7 @@ export class Employee {
     title = undefined;
     id = undefined;
     createdAt = undefined;
-    inDone = undefined;
+    isDone = undefined;
     dueDate = undefined;
 
     constructor(initData) {
